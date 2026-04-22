@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>SISTEMA // OBSERVADOR</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:#00ff9f;
+    font-family:monospace;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    overflow:hidden;
+}
+
+input{
+    margin-top:20px;
+    padding:10px;
+    background:black;
+    border:1px solid #00ff9f;
+    color:#00ff9f;
+    outline:none;
+    text-align:center;
+}
+
+/* glitch */
+.glitch{
+    animation:glitch 0.12s infinite;
+}
+
+@keyframes glitch{
+    0%{transform:translate(1px,-1px);}
+    25%{transform:translate(-1px,1px);}
+    50%{transform:translate(1px,1px);}
+    75%{transform:translate(-1px,-1px);}
+    100%{transform:translate(0,0);}
+}
+
+/* páginas */
+.page{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+.active{
+    display:flex;
+}
+
+/* auto mensagens */
+#autoMsg{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    color:#00ff9f;
+    max-width:320px;
+    opacity:0.8;
+    transition:0.2s;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div id="home" class="page active">
+    <h1>SISTEMA // OBSERVADOR</h1>
+    <p>DIGITE O CÓDIGO</p>
+    <input id="code" onkeyup="check()" placeholder="...">
+    <p id="response"></p>
+</div>
+
+<!-- NODE 1 -->
+<div id="node1" class="page">
+    <h2>NODE 01</h2>
+    <p>> ACCESS LOG: OK</p>
+    <p>> MEMORY STABLE</p>
+    <p>> USER DETECTED</p>
+</div>
+
+<!-- NODE WALK -->
+<div id="nodeWalk" class="page">
+    <h2>NODE 02</h2>
+    <p>> HE IS NOT WALKING</p>
+    <p>> MOTION: DISABLED</p>
+    <p>> OBSERVATION ACTIVE</p>
+</div>
+
+<!-- NODE 3 -->
+<div id="node3" class="page">
+    <h2>NODE 03</h2>
+    <p>> SIGNAL DETECTED</p>
+    <p>> UNKNOWN SOURCE</p>
+</div>
+
+<!-- NODE 4 SECRETO -->
+<div id="node4" class="page">
+    <h2>NODE 04 // HIDDEN</h2>
+    <p>> YOU SHOULDN'T BE HERE</p>
+    <p>> SYSTEM IS LEARNING YOU</p>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="page">
+    <h1 style="color:red;">SYSTEM OVERLOAD</h1>
+    <p id="count"></p>
+    <p id="end" style="display:none;">ENTITY TERMINATED</p>
+</div>
+
+<!-- AUTO MSG -->
+<div id="autoMsg"></div>
+
+<script>
+
+const messages = [
+    "/// OBSERVING USER...",
+    "SIGNAL STABILITY: LOW",
+    "IT IS STILL HERE",
+    "YOU SHOULDN'T TYPE",
+    "NODE MEMORY CORRUPTED",
+    "HE IS NOT WALKING",
+    "SOMETHING IS LISTENING",
+    "DO NOT TRUST INPUT",
+    "/// SYSTEM BREACH DETECTED"
+];
+
+let msgIndex = 0;
+
+/* =========================
+   🧠 MEMÓRIA FALSA
+========================= */
+let memory = JSON.parse(localStorage.getItem("observer_memory")) || [];
+
+function remember(event){
+    if(!memory.includes(event)){
+        memory.push(event);
+        localStorage.setItem("observer_memory", JSON.stringify(memory));
+    }
+}
+
+function hasMemory(event){
+    return memory.includes(event);
+}
+
+/* =========================
+   👁️ MENSAGENS DINÂMICAS
+========================= */
+function autoMessages(){
+    let box = document.getElementById("autoMsg");
+
+    let dynamic = [...messages];
+
+    if(hasMemory("node4_seen")){
+        dynamic.push("YOU ALREADY SAW WHAT SHOULDN'T EXIST");
+    }
+
+    if(hasMemory("attempt_exit")){
+        dynamic.push("EXIT ATTEMPT ALREADY REGISTERED");
+    }
+
+    if(hasMemory("first_contact")){
+        dynamic.push("WELCOME BACK");
+    }
+
+    box.innerText = dynamic[msgIndex % dynamic.length];
+    msgIndex++;
+}
+
+setInterval(autoMessages, 3500);
+setTimeout(autoMessages, 1000);
+
+/* =========================
+   📄 TROCA DE PÁGINAS
+========================= */
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+/* =========================
+   🔐 INPUT SYSTEM
+========================= */
+function check(){
+    let v = document.getElementById("code").value.toUpperCase();
+    let r = document.getElementById("response");
+
+    if(v === "HELLO"){
+        remember("first_contact");
+        r.innerHTML = "> ACCESS GRANTED";
+        showPage("node1");
+    }
+
+    if(v === "HE_IS_NOT_WALKING"){
+        r.innerHTML = "> NODE UNLOCKED";
+        showPage("nodeWalk");
+    }
+
+    if(v === "SIGNAL"){
+        r.innerHTML = "> CLASSIFIED NODE ACCESSED";
+        showPage("node3");
+    }
+
+    if(v === "VOID"){
+        remember("node4_seen");
+        r.innerHTML = "> HIDDEN NODE ACCESSED";
+        showPage("node4");
+    }
+
+    if(v === "TERMINATE"){
+        remember("attempt_exit");
+        startFinal();
+    }
+}
+
+/* =========================
+   💀 FINAL SEQUENCE
+========================= */
+function startFinal(){
+    showPage("final");
+
+    let c = 5;
+    let count = document.getElementById("count");
+
+    let i = setInterval(()=>{
+        count.innerText = "TERMINATING IN " + c;
+        c--;
+
+        document.body.classList.add("glitch");
+
+        if(c < 0){
+            clearInterval(i);
+            document.getElementById("end").style.display = "block";
+
+            setTimeout(()=>{
+                document.body.innerHTML =
+                "<h1 style='color:red;margin-top:40vh;'>SIGNAL LOST</h1>";
+            },2000);
+        }
+    },1000);
+}
+
+</script>
+
+</body>
+</html>
