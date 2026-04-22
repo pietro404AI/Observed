@@ -69,7 +69,116 @@ input{
     opacity:0.8;
     transition:0.2s;
 }
-</style>
+</sty<style>
+body{
+    margin:0;
+    background: radial-gradient(circle at center, #00110d 0%, #000000 70%);
+    color:#00ff9f;
+    font-family: 'Courier New', monospace;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* leve scanlines (efeito tela antiga) */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,255,159,0.03),
+        rgba(0,255,159,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events:none;
+}
+
+/* inputs mais “sistema real” */
+input, button{
+    margin-top:10px;
+    padding:12px;
+    background:rgba(0,0,0,0.6);
+    border:1px solid #00ff9f;
+    color:#00ff9f;
+    outline:none;
+    text-align:center;
+    border-radius:4px;
+    transition:0.2s;
+}
+
+input:focus{
+    box-shadow:0 0 15px #00ff9f55;
+}
+
+/* botão com glow */
+button:hover{
+    background:#00ff9f;
+    color:black;
+    box-shadow:0 0 20px #00ff9f;
+}
+
+/* glitch mais suave e realista */
+.glitch{
+    animation:glitch 0.15s infinite;
+}
+
+@keyframes glitch{
+    0%{transform:translate(0px,0px);}
+    20%{transform:translate(1px,-1px);}
+    40%{transform:translate(-1px,1px);}
+    60%{transform:translate(1px,1px);}
+    80%{transform:translate(-1px,-1px);}
+    100%{transform:translate(0px,0px);}
+}
+
+/* páginas com fade */
+.page{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    opacity:0;
+    transition:0.4s ease;
+}
+
+.active{
+    display:flex;
+    opacity:1;
+}
+
+/* títulos mais “sistema” */
+h1,h2{
+    letter-spacing:2px;
+    text-shadow:0 0 10px #00ff9f33;
+}
+
+/* auto mensagens estilo HUD */
+#autoMsg{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    color:#00ff9f;
+    max-width:320px;
+    opacity:0.9;
+    padding:10px;
+    border-left:2px solid #00ff9f;
+    background:rgba(0,0,0,0.4);
+}
+</stylee>
 </head>
 
 <body>
