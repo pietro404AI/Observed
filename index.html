@@ -2,298 +2,225 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>SISTEMA // OBSERVADOR</title>
+<title>A ENTIDADE // OBSERVADOR</title>
 
 <style>
 body{
     margin:0;
-    background: radial-gradient(circle at center, #00110d 0%, #000000 70%);
+    background:black;
     color:#00ff9f;
-    font-family: 'Courier New', monospace;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
+    font-family:monospace;
     overflow:hidden;
 }
 
-/* scanlines */
-body::before{
-    content:"";
+/* topo */
+#topbar{
     position:fixed;
     top:0;
     left:0;
     width:100%;
-    height:100%;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,255,159,0.03),
-        rgba(0,255,159,0.03) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-    pointer-events:none;
+    padding:8px;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #00ff9f33;
+    background:black;
+    z-index:10;
 }
 
-input, button{
-    margin-top:10px;
-    padding:12px;
-    background:rgba(0,0,0,0.6);
+/* layout */
+#container{
+    display:grid;
+    grid-template-columns: 1fr 2fr 1.2fr;
+    height:100vh;
+    padding-top:40px;
+}
+
+/* painéis */
+.panel{
+    border:1px solid #00ff9f22;
+    padding:15px;
+    overflow:hidden;
+}
+
+/* nodes */
+.node{
+    margin:8px 0;
+    padding:5px;
+    border-left:2px solid #00ff9f;
+}
+
+/* centro */
+#signal{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+/* input terminal */
+#terminal{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    padding:10px;
+    border-top:1px solid #00ff9f33;
+    background:black;
+}
+
+input{
+    background:black;
     border:1px solid #00ff9f;
     color:#00ff9f;
-    outline:none;
-    text-align:center;
-    border-radius:4px;
+    padding:8px;
+    width:60%;
 }
 
-button:hover{
-    background:#00ff9f;
-    color:black;
-}
-
+/* glitch */
 .glitch{
     animation:glitch 0.15s infinite;
 }
 
 @keyframes glitch{
-    0%{transform:translate(0px,0px);}
+    0%{transform:translate(0,0);}
     25%{transform:translate(1px,-1px);}
     50%{transform:translate(-1px,1px);}
     75%{transform:translate(1px,1px);}
-    100%{transform:translate(0px,0px);}
+    100%{transform:translate(0,0);}
 }
 
-.page{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    height:100%;
-    position:fixed;
-    top:0;
-    left:0;
-    opacity:0;
-    transition:0.3s ease;
-}
-
-.active{
-    display:flex !important;
-    opacity:1;
-}
-
-h1,h2{
-    letter-spacing:2px;
-    text-shadow:0 0 10px #00ff9f33;
-}
-
-#autoMsg{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    color:#00ff9f;
-    max-width:320px;
-    opacity:0.9;
-    padding:10px;
-    border-left:2px solid #00ff9f;
-    background:rgba(0,0,0,0.4);
+/* olho */
+.eye{
+    width:120px;
+    height:120px;
+    border:2px solid red;
+    border-radius:50%;
+    margin-top:20px;
+    box-shadow:0 0 20px red;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HOME -->
-<div id="home" class="page active">
-    <h1>SISTEMA // OBSERVADOR</h1>
-
-    <p>IDENTIFIQUE-SE</p>
-    <input id="nameInput" placeholder="Seu nome...">
-    <button onclick="setName()">CONFIRMAR</button>
-
-    <br><br>
-
-    <p>DIGITE O CÓDIGO</p>
-    <input id="code" onkeyup="check()" placeholder="...">
-
-    <p id="response"></p>
+<!-- TOP -->
+<div id="topbar">
+    <span>A ENTIDADE - ARG VIVO // SESSÃO 6</span>
+    <span style="color:red;">VOCÊ ESTÁ SENDO OBSERVADO</span>
 </div>
 
-<!-- NODE 1 -->
-<div id="node1" class="page">
-    <h2>NODE 01</h2>
-    <p>> ACCESS LOG: OK</p>
+<!-- MAIN -->
+<div id="container">
+
+    <!-- LEFT -->
+    <div class="panel">
+        <h3>NODES</h3>
+
+        <div class="node">NODE 1 ✔</div>
+        <div class="node">NODE 2 ✔</div>
+        <div class="node">NODE 3 ✔</div>
+        <div class="node">NODE 4 ✔</div>
+        <div class="node">NODE 5 ✔</div>
+
+        <div class="node" style="color:red;">SINAL 404 // ATIVO</div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="panel" id="signal">
+        <h2>SINAL 404</h2>
+
+        <p>ORIGEM: DESCONHECIDA</p>
+        <p>STATUS: CORROMPIDO</p>
+
+        <p style="margin-top:15px;">
+        “o arquivo ainda responde… mesmo quebrado”
+        </p>
+
+        <div class="eye"></div>
+
+        <p id="systemMsg" style="opacity:0.6; margin-top:20px;">
+        não pergunte… apenas observe.
+        </p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel">
+        <h3>ARQUIVO: sinal_404.corrupted</h3>
+
+        <p style="color:red;">SINAL 404 NÃO ENCONTRADO</p>
+
+        <p>integridade: 23%</p>
+        <p>dano crítico detectado</p>
+
+        <br>
+
+        <p id="userStatus">usuário: não identificado</p>
+    </div>
+
 </div>
 
-<!-- NODE 2 -->
-<div id="nodeWalk" class="page">
-    <h2>NODE 02</h2>
-    <p>> HE IS NOT WALKING</p>
+<!-- TERMINAL -->
+<div id="terminal">
+    <input id="cmd" onkeyup="check()" placeholder="ENTIDADE://~$ digite algo...">
+    <span id="response"></span>
 </div>
-
-<!-- NODE 3 -->
-<div id="node3" class="page">
-    <h2>NODE 03</h2>
-    <p>> SIGNAL DETECTED</p>
-</div>
-
-<!-- NODE 4 -->
-<div id="node4" class="page">
-    <h2>NODE 04 // HIDDEN</h2>
-    <p>> SYSTEM IS LEARNING YOU</p>
-</div>
-
-<!-- FINAL -->
-<div id="final" class="page">
-    <h1 style="color:red;">SYSTEM OVERLOAD</h1>
-    <p id="count"></p>
-    <p id="end" style="display:none;">ENTITY TERMINATED</p>
-</div>
-
-<!-- AUTO MSG -->
-<div id="autoMsg"></div>
 
 <script>
 
 /* =========================
-   BASE
-========================= */
-const messages = [
-    "/// OBSERVING USER...",
-    "SIGNAL STABILITY: LOW",
-    "IT IS STILL HERE",
-    "NODE ACTIVE",
-    "SYSTEM WATCHING"
-];
-
-let msgIndex = 0;
-
-/* =========================
    MEMÓRIA
 ========================= */
-let memory = JSON.parse(localStorage.getItem("observer_memory")) || [];
 let userName = localStorage.getItem("observer_name") || "";
 
-function remember(e){
-    if(!memory.includes(e)){
-        memory.push(e);
-        localStorage.setItem("observer_memory", JSON.stringify(memory));
-    }
-}
-
-function hasMemory(e){
-    return memory.includes(e);
+if(userName){
+    document.getElementById("userStatus").innerText =
+    "usuário: " + userName + " (OBSERVADO)";
 }
 
 /* =========================
-   NOME
-========================= */
-function setName(){
-    let name = document.getElementById("nameInput").value;
-    if(!name) return;
-
-    userName = name;
-    localStorage.setItem("observer_name", name);
-
-    remember("user_identified");
-
-    document.getElementById("response").innerHTML =
-    "> " + name + ", você está sendo observado 👁️";
-}
-
-/* =========================
-   AUTO MSG
-========================= */
-function autoMessages(){
-    let box = document.getElementById("autoMsg");
-
-    let dynamic = [...messages];
-
-    if(userName){
-        dynamic.push(userName.toUpperCase() + " DETECTED");
-    }
-
-    box.innerText = dynamic[msgIndex % dynamic.length];
-    msgIndex++;
-}
-
-setInterval(autoMessages, 3000);
-
-/* =========================
-   NAVEGAÇÃO SEGURA
-========================= */
-function showPage(id){
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    let el = document.getElementById(id);
-    if(el) el.classList.add("active");
-}
-
-/* =========================
-   CHECK
+   TERMINAL COMANDOS
 ========================= */
 function check(){
-    let v = document.getElementById("code").value.toUpperCase();
+    let v = document.getElementById("cmd").value.toUpperCase();
     let r = document.getElementById("response");
 
     if(v === "HELLO"){
-        showPage("node1");
-        r.innerHTML = "> ACCESS GRANTED";
-    }
-
-    if(v === "HE_IS_NOT_WALKING"){
-        showPage("nodeWalk");
-    }
-
-    if(v === "SIGNAL"){
-        showPage("node3");
+        r.innerText = " > CONEXÃO ESTABELECIDA";
     }
 
     if(v === "VOID"){
-        remember("node4_seen");
-        showPage("node4");
+        document.getElementById("systemMsg").innerText =
+        "a entidade já te viu antes...";
     }
 
-    if(v === "TERMINATE"){
-        startFinal();
+    if(v === "NAME"){
+        r.innerText = " > " + (userName || "DESCONHECIDO");
     }
-}
 
-/* =========================
-   FINAL
-========================= */
-function startFinal(){
-    showPage("final");
-
-    let c = 5;
-    let count = document.getElementById("count");
-
-    let i = setInterval(()=>{
-        count.innerText = "TERMINATING IN " + c;
-        c--;
-
+    if(v === "GLITCH"){
         document.body.classList.add("glitch");
 
-        if(c < 0){
-            clearInterval(i);
-            document.getElementById("end").style.display = "block";
-
-            setTimeout(()=>{
-                document.body.innerHTML =
-                "<h1 style='color:red;margin-top:40vh;'>SIGNAL LOST</h1>";
-            },2000);
-        }
-    },1000);
+        setTimeout(()=>{
+            document.body.classList.remove("glitch");
+        }, 800);
+    }
 }
 
 /* =========================
-   FIX ANTI-TELA-PRETA
+   EFEITO DE VIDA DO SISTEMA
 ========================= */
-window.onload = () => {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById("home").classList.add("active");
-};
+setInterval(()=>{
+    let msgs = [
+        "não confie no sinal...",
+        "ele ainda está aqui",
+        "observação ativa",
+        "memória instável detectada"
+    ];
+
+    document.getElementById("systemMsg").innerText =
+    msgs[Math.floor(Math.random()*msgs.length)];
+}, 5000);
 
 </script>
 
