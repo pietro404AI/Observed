@@ -19,7 +19,7 @@ body{
     overflow:hidden;
 }
 
-/* leve scanlines (efeito tela antiga) */
+/* scanlines */
 body::before{
     content:"";
     position:fixed;
@@ -37,7 +37,6 @@ body::before{
     pointer-events:none;
 }
 
-/* inputs mais “sistema real” */
 input, button{
     margin-top:10px;
     padding:12px;
@@ -47,35 +46,25 @@ input, button{
     outline:none;
     text-align:center;
     border-radius:4px;
-    transition:0.2s;
 }
 
-input:focus{
-    box-shadow:0 0 15px #00ff9f55;
-}
-
-/* botão com glow */
 button:hover{
     background:#00ff9f;
     color:black;
-    box-shadow:0 0 20px #00ff9f;
 }
 
-/* glitch mais suave e realista */
 .glitch{
     animation:glitch 0.15s infinite;
 }
 
 @keyframes glitch{
     0%{transform:translate(0px,0px);}
-    20%{transform:translate(1px,-1px);}
-    40%{transform:translate(-1px,1px);}
-    60%{transform:translate(1px,1px);}
-    80%{transform:translate(-1px,-1px);}
+    25%{transform:translate(1px,-1px);}
+    50%{transform:translate(-1px,1px);}
+    75%{transform:translate(1px,1px);}
     100%{transform:translate(0px,0px);}
 }
 
-/* páginas com fade */
 .page{
     display:none;
     flex-direction:column;
@@ -87,21 +76,19 @@ button:hover{
     top:0;
     left:0;
     opacity:0;
-    transition:0.4s ease;
+    transition:0.3s ease;
 }
 
 .active{
-    display:flex;
+    display:flex !important;
     opacity:1;
 }
 
-/* títulos mais “sistema” */
 h1,h2{
     letter-spacing:2px;
     text-shadow:0 0 10px #00ff9f33;
 }
 
-/* auto mensagens estilo HUD */
 #autoMsg{
     position:fixed;
     bottom:20px;
@@ -114,156 +101,6 @@ h1,h2{
     background:rgba(0,0,0,0.4);
 }
 </style>
-/* glitch */
-.glitch{
-    animation:glitch 0.12s infinite;
-}
-
-@keyframes glitch{
-    0%{transform:translate(1px,-1px);}
-    25%{transform:translate(-1px,1px);}
-    50%{transform:translate(1px,1px);}
-    75%{transform:translate(-1px,-1px);}
-    100%{transform:translate(0,0);}
-}
-
-/* páginas */
-.page{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    height:100%;
-    position:fixed;
-    top:0;
-    left:0;
-}
-
-.active{
-    display:flex;
-}
-
-/* auto mensagens */
-#autoMsg{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    color:#00ff9f;
-    max-width:320px;
-    opacity:0.8;
-    transition:0.2s;
-}
-</sty<style>
-body{
-    margin:0;
-    background: radial-gradient(circle at center, #00110d 0%, #000000 70%);
-    color:#00ff9f;
-    font-family: 'Courier New', monospace;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    overflow:hidden;
-}
-
-/* leve scanlines (efeito tela antiga) */
-body::before{
-    content:"";
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,255,159,0.03),
-        rgba(0,255,159,0.03) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-    pointer-events:none;
-}
-
-/* inputs mais “sistema real” */
-input, button{
-    margin-top:10px;
-    padding:12px;
-    background:rgba(0,0,0,0.6);
-    border:1px solid #00ff9f;
-    color:#00ff9f;
-    outline:none;
-    text-align:center;
-    border-radius:4px;
-    transition:0.2s;
-}
-
-input:focus{
-    box-shadow:0 0 15px #00ff9f55;
-}
-
-/* botão com glow */
-button:hover{
-    background:#00ff9f;
-    color:black;
-    box-shadow:0 0 20px #00ff9f;
-}
-
-/* glitch mais suave e realista */
-.glitch{
-    animation:glitch 0.15s infinite;
-}
-
-@keyframes glitch{
-    0%{transform:translate(0px,0px);}
-    20%{transform:translate(1px,-1px);}
-    40%{transform:translate(-1px,1px);}
-    60%{transform:translate(1px,1px);}
-    80%{transform:translate(-1px,-1px);}
-    100%{transform:translate(0px,0px);}
-}
-
-/* páginas com fade */
-.page{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    height:100%;
-    position:fixed;
-    top:0;
-    left:0;
-    opacity:0;
-    transition:0.4s ease;
-}
-
-.active{
-    display:flex;
-    opacity:1;
-}
-
-/* títulos mais “sistema” */
-h1,h2{
-    letter-spacing:2px;
-    text-shadow:0 0 10px #00ff9f33;
-}
-
-/* auto mensagens estilo HUD */
-#autoMsg{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    color:#00ff9f;
-    max-width:320px;
-    opacity:0.9;
-    padding:10px;
-    border-left:2px solid #00ff9f;
-    background:rgba(0,0,0,0.4);
-}
-</stylee>
 </head>
 
 <body>
@@ -271,8 +108,16 @@ h1,h2{
 <!-- HOME -->
 <div id="home" class="page active">
     <h1>SISTEMA // OBSERVADOR</h1>
+
+    <p>IDENTIFIQUE-SE</p>
+    <input id="nameInput" placeholder="Seu nome...">
+    <button onclick="setName()">CONFIRMAR</button>
+
+    <br><br>
+
     <p>DIGITE O CÓDIGO</p>
     <input id="code" onkeyup="check()" placeholder="...">
+
     <p id="response"></p>
 </div>
 
@@ -280,29 +125,23 @@ h1,h2{
 <div id="node1" class="page">
     <h2>NODE 01</h2>
     <p>> ACCESS LOG: OK</p>
-    <p>> MEMORY STABLE</p>
-    <p>> USER DETECTED</p>
 </div>
 
-<!-- NODE WALK -->
+<!-- NODE 2 -->
 <div id="nodeWalk" class="page">
     <h2>NODE 02</h2>
     <p>> HE IS NOT WALKING</p>
-    <p>> MOTION: DISABLED</p>
-    <p>> OBSERVATION ACTIVE</p>
 </div>
 
 <!-- NODE 3 -->
 <div id="node3" class="page">
     <h2>NODE 03</h2>
     <p>> SIGNAL DETECTED</p>
-    <p>> UNKNOWN SOURCE</p>
 </div>
 
-<!-- NODE 4 SECRETO -->
+<!-- NODE 4 -->
 <div id="node4" class="page">
     <h2>NODE 04 // HIDDEN</h2>
-    <p>> YOU SHOULDN'T BE HERE</p>
     <p>> SYSTEM IS LEARNING YOU</p>
 </div>
 
@@ -318,108 +157,111 @@ h1,h2{
 
 <script>
 
+/* =========================
+   BASE
+========================= */
 const messages = [
     "/// OBSERVING USER...",
     "SIGNAL STABILITY: LOW",
     "IT IS STILL HERE",
-    "YOU SHOULDN'T TYPE",
-    "NODE MEMORY CORRUPTED",
-    "HE IS NOT WALKING",
-    "SOMETHING IS LISTENING",
-    "DO NOT TRUST INPUT",
-    "/// SYSTEM BREACH DETECTED"
+    "NODE ACTIVE",
+    "SYSTEM WATCHING"
 ];
 
 let msgIndex = 0;
 
 /* =========================
-   🧠 MEMÓRIA FALSA
+   MEMÓRIA
 ========================= */
 let memory = JSON.parse(localStorage.getItem("observer_memory")) || [];
+let userName = localStorage.getItem("observer_name") || "";
 
-function remember(event){
-    if(!memory.includes(event)){
-        memory.push(event);
+function remember(e){
+    if(!memory.includes(e)){
+        memory.push(e);
         localStorage.setItem("observer_memory", JSON.stringify(memory));
     }
 }
 
-function hasMemory(event){
-    return memory.includes(event);
+function hasMemory(e){
+    return memory.includes(e);
 }
 
 /* =========================
-   👁️ MENSAGENS DINÂMICAS
+   NOME
+========================= */
+function setName(){
+    let name = document.getElementById("nameInput").value;
+    if(!name) return;
+
+    userName = name;
+    localStorage.setItem("observer_name", name);
+
+    remember("user_identified");
+
+    document.getElementById("response").innerHTML =
+    "> " + name + ", você está sendo observado 👁️";
+}
+
+/* =========================
+   AUTO MSG
 ========================= */
 function autoMessages(){
     let box = document.getElementById("autoMsg");
 
     let dynamic = [...messages];
 
-    if(hasMemory("node4_seen")){
-        dynamic.push("YOU ALREADY SAW WHAT SHOULDN'T EXIST");
-    }
-
-    if(hasMemory("attempt_exit")){
-        dynamic.push("EXIT ATTEMPT ALREADY REGISTERED");
-    }
-
-    if(hasMemory("first_contact")){
-        dynamic.push("WELCOME BACK");
+    if(userName){
+        dynamic.push(userName.toUpperCase() + " DETECTED");
     }
 
     box.innerText = dynamic[msgIndex % dynamic.length];
     msgIndex++;
 }
 
-setInterval(autoMessages, 3500);
-setTimeout(autoMessages, 1000);
+setInterval(autoMessages, 3000);
 
 /* =========================
-   📄 TROCA DE PÁGINAS
+   NAVEGAÇÃO SEGURA
 ========================= */
 function showPage(id){
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+    let el = document.getElementById(id);
+    if(el) el.classList.add("active");
 }
 
 /* =========================
-   🔐 INPUT SYSTEM
+   CHECK
 ========================= */
 function check(){
     let v = document.getElementById("code").value.toUpperCase();
     let r = document.getElementById("response");
 
     if(v === "HELLO"){
-        remember("first_contact");
-        r.innerHTML = "> ACCESS GRANTED";
         showPage("node1");
+        r.innerHTML = "> ACCESS GRANTED";
     }
 
     if(v === "HE_IS_NOT_WALKING"){
-        r.innerHTML = "> NODE UNLOCKED";
         showPage("nodeWalk");
     }
 
     if(v === "SIGNAL"){
-        r.innerHTML = "> CLASSIFIED NODE ACCESSED";
         showPage("node3");
     }
 
     if(v === "VOID"){
         remember("node4_seen");
-        r.innerHTML = "> HIDDEN NODE ACCESSED";
         showPage("node4");
     }
 
     if(v === "TERMINATE"){
-        remember("attempt_exit");
         startFinal();
     }
 }
 
 /* =========================
-   💀 FINAL SEQUENCE
+   FINAL
 ========================= */
 function startFinal(){
     showPage("final");
@@ -444,6 +286,14 @@ function startFinal(){
         }
     },1000);
 }
+
+/* =========================
+   FIX ANTI-TELA-PRETA
+========================= */
+window.onload = () => {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("home").classList.add("active");
+};
 
 </script>
 
